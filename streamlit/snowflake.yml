@@ -1,0 +1,14 @@
+definition_version: 2
+entities:
+  hybrid_retail_app:
+    type: streamlit
+    identifier:
+      name: HYBRID_RETAIL_APP
+      database: DEMO
+      schema: HYBRID_RETAIL
+    query_warehouse: HT_DEMO_WH
+    runtime_name: SYSTEM$ST_CONTAINER_RUNTIME_PY3_11
+    compute_pool: SYSTEM_COMPUTE_POOL_CPU
+    main_file: streamlit_app.py
+    artifacts:
+      - streamlit_app.py
