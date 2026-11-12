@@ -9,6 +9,11 @@ entities:
     query_warehouse: HT_DEMO_WH
     runtime_name: SYSTEM$ST_CONTAINER_RUNTIME_PY3_11
     compute_pool: SYSTEM_COMPUTE_POOL_CPU
+    # Required because pyproject.toml is deployed (the container runtime resolves packages from PyPI).
+    # Replace with your account's PyPI external access integration.
+    external_access_integrations:
+      - PYPI_ACCESS_INTEGRATION
     main_file: streamlit_app.py
     artifacts:
       - streamlit_app.py
+      - pyproject.toml
