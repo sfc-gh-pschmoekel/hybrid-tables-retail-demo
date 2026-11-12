@@ -15,6 +15,12 @@ All data is synthetic.
 - A role that can create a schema in a standard (non-transient) database, a warehouse, and a Streamlit app
 - Tri-Secret Secure and periodic data rekeying not enabled
 - [Snowflake CLI](https://docs.snowflake.com/en/developer-guide/snowflake-cli/index) 3.14+ to deploy the app
+- A PyPI external access integration for the container-runtime Streamlit app (the app deploys a `pyproject.toml`).
+  If your account has none, an admin can create one with Snowflake's managed rule:
+  ```sql
+  CREATE EXTERNAL ACCESS INTEGRATION PYPI_ACCESS_INTEGRATION
+    ALLOWED_NETWORK_RULES = (snowflake.external_access.pypi_rule) ENABLED = TRUE;
+  ```
 
 ## What gets created
 
@@ -46,7 +52,8 @@ deployment: one warehouse serves the app, another serves analytics.
    cd streamlit
    snow streamlit deploy --replace --prune --connection <your connection>
    ```
-   Edit `streamlit/snowflake.yml` first if your compute pool is not `SYSTEM_COMPUTE_POOL_CPU`.
+   Edit `streamlit/snowflake.yml` first if your compute pool is not `SYSTEM_COMPUTE_POOL_CPU` or your PyPI
+   integration is not named `PYPI_ACCESS_INTEGRATION`.
 4. `sql/03_demo_worksheet.sql`: the live talk track. Run it **section by section** (Section B is supposed to fail).
 5. Optional: `scripts/benchmark_lookups.py` for a parameterized lookup benchmark.
 6. `sql/04_teardown.sql` when you are done.
